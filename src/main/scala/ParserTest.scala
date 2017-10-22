@@ -4,7 +4,6 @@ import java.util.stream.Collectors
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.circe.parser._
-import play.api.libs.json.Json
 
 
 /**
@@ -19,10 +18,8 @@ object ParserTest extends App {
 
     testParse(str, "circe")(parse)
 
-    val mapper = new ObjectMapper
-    testParse(str, "jackson")(mapper.readTree)
-
-    testParse(str, "play-json")(Json.parse)
+//    val mapper = new ObjectMapper
+//    testParse(str, "jackson")(mapper.readTree)
   }
 
   def testParse(str: String, parser: String)(f: String => Any): Unit = {
