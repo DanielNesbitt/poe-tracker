@@ -1,10 +1,10 @@
+package dnesbitt
+
 import java.io.{BufferedReader, FileReader}
 import java.nio.file.Paths
 import java.util.stream.Collectors
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import io.circe.parser._
-
+import io.circe.parser.parse
 
 /**
   * @author Daniel Nesbitt

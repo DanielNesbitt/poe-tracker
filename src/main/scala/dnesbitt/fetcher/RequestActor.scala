@@ -1,4 +1,4 @@
-package fetcher
+package dnesbitt.fetcher
 
 import akka.actor.{Actor, ActorLogging}
 import akka.http.scaladsl.Http
@@ -9,7 +9,7 @@ import cats.Show
 import de.heikoseeberger.akkahttpcirce.FailFastCirceSupport
 import io.circe._
 import io.circe.generic.semiauto._
-import json.Stashes
+import dnesbitt.json.Stashes
 
 import scala.util.{Failure, Success}
 
@@ -20,7 +20,7 @@ class RequestActor extends Actor with ActorLogging {
 
   import akka.pattern.pipe
   import context.dispatcher
-  import json.PoeEntities._
+  import dnesbitt.json.PoeEntities._
 
   final implicit val errorShow: Show[Error] = Error.showError
 
@@ -38,12 +38,13 @@ class RequestActor extends Actor with ActorLogging {
   }
 
   override def receive: Receive = {
-    case HttpResponse(StatusCodes.OK, headers, entity, _) => {
+    case HttpResponse(StatusCodes.OK, _, entity, _) => {
       Unmarshal(entity)
         .to[Stashes]
         .onComplete {
           case Success(stashes) => {
             log.info(s"Next change id ${stashes.next_change_id}")
+            changeId = stashes.next_change_id
           }
           case Failure(th: Error) =>
             log.error("Failed to un-marshall response. " + errorShow.show(th))

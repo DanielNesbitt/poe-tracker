@@ -1,4 +1,4 @@
-package util
+package dnesbitt.util
 
 /**
   * @author Daniel Nesbitt

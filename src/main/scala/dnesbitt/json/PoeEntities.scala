@@ -1,4 +1,4 @@
-package json
+package dnesbitt.json
 
 /**
   * @author Daniel Nesbitt.

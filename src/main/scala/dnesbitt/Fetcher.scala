@@ -1,9 +1,8 @@
-package fetcher
+package dnesbitt
 
 import akka.actor.{ActorSystem, Props}
 import com.typesafe.config.ConfigFactory
-
-import scala.concurrent.Await
+import fetcher.RequestActor
 
 /**
   * @author Daniel Nesbitt
