@@ -17,9 +17,6 @@ object ParserTest extends App {
     val str = new BufferedReader(new FileReader(path.toFile)).lines().collect(Collectors.joining())
 
     testParse(str, "circe")(parse)
-
-//    val mapper = new ObjectMapper
-//    testParse(str, "jackson")(mapper.readTree)
   }
 
   def testParse(str: String, parser: String)(f: String => Any): Unit = {

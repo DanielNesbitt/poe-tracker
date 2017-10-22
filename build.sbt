@@ -11,8 +11,6 @@ libraryDependencies ++= Seq(
 
 libraryDependencies += "de.heikoseeberger" %% "akka-http-circe" % "1.15.0"
 
-libraryDependencies += "com.fasterxml.jackson.core" % "jackson-databind" % "2.9.0"
-
 libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-actor" % "2.5.6",
   "com.typesafe.akka" %% "akka-stream" % "2.5.6",
