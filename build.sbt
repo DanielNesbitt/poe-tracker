@@ -18,3 +18,5 @@ libraryDependencies ++= Seq(
 )
 
 libraryDependencies += "com.typesafe.akka" %% "akka-http" % "10.0.10"
+
+libraryDependencies += "com.google.cloud" % "google-cloud-bigquery" % "0.25.0-beta"

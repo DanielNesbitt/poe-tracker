@@ -16,7 +16,7 @@ import scala.util.{Failure, Success}
 /**
   * @author Daniel Nesbitt
   */
-class RequestActor extends Actor with ActorLogging {
+class RequestActor(var changeId: String) extends Actor with ActorLogging {
 
   import akka.pattern.pipe
   import context.dispatcher
@@ -29,8 +29,6 @@ class RequestActor extends Actor with ActorLogging {
   final implicit val materializer: ActorMaterializer = ActorMaterializer(ActorMaterializerSettings(context.system))
 
   val http = Http(context.system)
-
-  var changeId = ""
 
   override def preStart(): Unit = {
     http.singleRequest(HttpRequest(uri = "http://www.pathofexile.com/api/public-stash-tabs?id=220-1652-744-1341-230"))
