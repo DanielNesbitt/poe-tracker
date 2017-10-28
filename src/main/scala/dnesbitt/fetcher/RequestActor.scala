@@ -8,7 +8,6 @@ import akka.stream.{ActorMaterializer, ActorMaterializerSettings}
 import cats.Show
 import de.heikoseeberger.akkahttpcirce.FailFastCirceSupport
 import io.circe._
-import io.circe.generic.semiauto._
 import dnesbitt.json.Stashes
 
 import scala.util.{Failure, Success}
@@ -43,9 +42,17 @@ class RequestActor(var changeId: String) extends Actor with ActorLogging {
           case Success(stashes) => {
             log.info(s"Next change id ${stashes.next_change_id}")
             changeId = stashes.next_change_id
+            val test = (s: String) => /*s.contains("chaos") ||*/ s.contains("exa")
+            val foo = stashes.stashes
+              .flatMap(s => s.items.map(i => (s, i)))
+              .filter { case (s, i) => s.stash.exists(test) || i.note.exists(test) }
+            val distinct = stashes.stashes.flatMap(_.items).map(i => i.typeLine).distinct
+            log.info(s"Handled ${stashes.stashes.flatMap(_.items).count(_ => true)} items")
           }
           case Failure(th: Error) =>
             log.error("Failed to un-marshall response. " + errorShow.show(th))
+          case Failure(th) =>
+            log.error("Failed to un-marshall response.")
         }
 
     }

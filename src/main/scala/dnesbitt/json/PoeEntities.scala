@@ -36,7 +36,8 @@ case class Item
   typeLine: String,
   identified: Boolean,
   corrupted: Boolean,
-//  properties: List[Property],
+  properties: Option[List[Property]],
+  sockets: Option[List[Socket]],
   explicitMods: Option[List[String]],
   implicitMods: Option[List[String]],
   enchantMods: Option[List[String]],
@@ -47,6 +48,6 @@ case class Item
   inventoryId: String
 )
 
-case class Socket(groupId: String, attr: String)
+case class Socket(groupId: Option[String], attr: String)
 
-case class Property(name: String, values: List[String])
+case class Property(name: String)

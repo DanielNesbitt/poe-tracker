@@ -7,12 +7,12 @@ import fetcher.RequestActor
 /**
   * @author Daniel Nesbitt
   */
-object Fetcher extends App {
+object Application extends App {
 
   override def main(args: Array[String]) {
     val config = ConfigFactory.load("application.conf")
     val system = ActorSystem()
-    system.actorOf(Props[RequestActor])
+    system.actorOf(Props(classOf[RequestActor], ""))
   }
 
 }
